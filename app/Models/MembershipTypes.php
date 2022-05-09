@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class MembershipTypes extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['type'];
+
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class);
+    }
 }

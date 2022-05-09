@@ -15,7 +15,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        //
+        return Card::all();
     }
 
     /**
@@ -26,6 +26,7 @@ class CardController extends Controller
     public function create()
     {
         //
+
     }
 
     /**

@@ -15,8 +15,7 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        //
-        dd(People::limit(10)->get());
+        return People::all();
     }
 
     /**

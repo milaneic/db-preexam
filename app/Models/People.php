@@ -9,7 +9,7 @@ class People extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['first_name', 'last_name', 'dob', 'gender', 'joined_at'];
+    protected $fillable = ['people_type', 'first_name', 'last_name', 'dob', 'gender', 'joined_at'];
 
     public $timestamps = false;
 
@@ -18,5 +18,10 @@ class People extends Model
     public function memberships()
     {
         return $this->hasMany(Membership::class);
+    }
+
+    public function people_type()
+    {
+        return $this->belongsTo(PeopleType::class);
     }
 }

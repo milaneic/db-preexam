@@ -1,9 +1,16 @@
 <?php
 
 use App\Http\Controllers\CardController;
+use App\Http\Controllers\CheckInController;
+use App\Http\Controllers\CheckTypeController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MembershipTypesController;
 use App\Http\Controllers\PeopleController;
+use App\Http\Controllers\PeopleTypeController;
+use App\Models\CheckIn;
+use App\Models\CheckType;
+use App\Models\People;
+use App\Models\PeopleType;
 use Brick\Math\RoundingMode;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +27,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PeopleController::class, 'index']);
 
+Route::get('/people', [PeopleController::class, 'index']);
+Route::get('/peopletypes', [PeopleTypeController::class, 'index']);
 Route::get('/memberships', [MembershipController::class, 'index']);
-Route::get('/membershiptypes', [MembershipTypesController::class], 'index');
+Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
 Route::get('/cards', [CardController::class, 'index']);
+Route::get('/checkin', [CheckInController::class, 'index']);
+Route::get('/checktypes', [CheckTypeController::class, 'index']);

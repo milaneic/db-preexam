@@ -18,6 +18,7 @@ class PeopleFactory extends Factory
     {
         return [
             //
+            'people_type' => $this->faker->numberBetween(1, 2),
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'dob' => $this->faker->DateTimeBetween('1970-01-01', '2004-01-01'),

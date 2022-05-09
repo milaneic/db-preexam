@@ -15,7 +15,7 @@ class MembershipTypesController extends Controller
      */
     public function index()
     {
-        //
+        return MembershipTypes::all();
     }
 
     /**

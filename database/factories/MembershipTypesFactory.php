@@ -18,7 +18,7 @@ class MembershipTypesFactory extends Factory
     {
         return [
             //
-            'type' => $this->faker->unique()->randomElement(['standard', 'premium']),
+            'type' => $this->faker->unique()->randomElement(['Standard', 'Premium']),
         ];
     }
 }
