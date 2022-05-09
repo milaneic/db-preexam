@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
             PeopleSeeder::class,
             MembershipTypesSeeder::class,
             MembershipSeeder::class,
+            CardSeeder::class,
+            CheckTypeSeeder::class,
+            CheckInSeeder::class,
         ]);
     }
 }

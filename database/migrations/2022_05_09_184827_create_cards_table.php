@@ -15,6 +15,9 @@ return new class extends Migration
     {
         Schema::create('cards', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('membership_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->decimal('balance');
+            $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });
     }

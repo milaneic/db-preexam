@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CardController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MembershipTypesController;
 use App\Http\Controllers\PeopleController;
@@ -21,3 +22,4 @@ Route::get('/', [PeopleController::class, 'index']);
 
 Route::get('/memberships', [MembershipController::class, 'index']);
 Route::get('/membershiptypes', [MembershipTypesController::class], 'index');
+Route::get('/cards', [CardController::class, 'index']);
