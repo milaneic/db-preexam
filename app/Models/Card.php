@@ -9,9 +9,9 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['membership_id', 'balance', 'status'];
+    protected $fillable = ['people_id', 'membership_id', 'balance', 'status'];
 
-    public function memberships()
+    public function membership()
     {
         return $this->belongsTo(Membership::class);
     }
@@ -19,5 +19,10 @@ class Card extends Model
     public function check_ins()
     {
         return $this->hasMany(CheckIn::class);
+    }
+
+    public function people()
+    {
+        return $this->belongsTo(People::class);
     }
 }

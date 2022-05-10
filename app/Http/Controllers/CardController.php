@@ -15,7 +15,7 @@ class CardController extends Controller
      */
     public function index()
     {
-        return Card::all();
+        return view('cards.index', ['cards' => Card::all()]);
     }
 
     /**
@@ -48,7 +48,7 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        //
+        dd($card->membership, $card->check_ins);
     }
 
     /**

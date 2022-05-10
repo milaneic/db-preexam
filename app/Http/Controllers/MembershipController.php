@@ -15,8 +15,7 @@ class MembershipController extends Controller
      */
     public function index()
     {
-        //
-        return Membership::all();
+        return view('memberships.index', ['memberships' => Membership::all()]);
     }
 
     /**
@@ -48,7 +47,7 @@ class MembershipController extends Controller
      */
     public function show(Membership $membership)
     {
-        //
+        return $membership;
     }
 
     /**

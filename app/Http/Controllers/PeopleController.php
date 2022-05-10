@@ -15,7 +15,7 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        return People::all();
+        return view('people.index', ['people' => People::all()]);
     }
 
     /**
@@ -25,7 +25,7 @@ class PeopleController extends Controller
      */
     public function create()
     {
-        //
+        return view('people.create');
     }
 
     /**
@@ -36,7 +36,18 @@ class PeopleController extends Controller
      */
     public function store(StorePeopleRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'people_type' => 'required|in:1,2',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required|in:male,female',
+            'dob' => 'required|date',
+            'joined_at' => 'required|date'
+        ]);
+
+        People::create($validatedData);
+
+        return redirect()->route('people.index');
     }
 
     /**
@@ -45,9 +56,9 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function show(People $people)
+    public function show(People $person)
     {
-        //
+        return view('people.show', ['person' => $person]);
     }
 
     /**
@@ -56,9 +67,9 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function edit(People $people)
+    public function edit(People $person)
     {
-        //
+        return view('people.edit', ['person' => $person]);
     }
 
     /**
@@ -68,9 +79,20 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePeopleRequest $request, People $people)
+    public function update(UpdatePeopleRequest $request, People $person)
     {
-        //
+        $validatedData = $request->validate([
+            'people_type' => 'required|in:1,2',
+            'first_name' => 'required|max:255',
+            'last_name' => 'required|max:255',
+            'gender' => 'required|in:male,female',
+            'dob' => 'required|date',
+            'joined_at' => 'required|date'
+        ]);
+
+        $person->updateOrFail($validatedData);
+
+        return redirect()->route('people.index');
     }
 
     /**
@@ -79,8 +101,10 @@ class PeopleController extends Controller
      * @param  \App\Models\People  $people
      * @return \Illuminate\Http\Response
      */
-    public function destroy(People $people)
+    public function destroy(People $person)
     {
-        //
+        if ($person)
+            $person->delete();
+        return redirect()->route('people.index');
     }
 }

@@ -47,7 +47,7 @@ class MembershipTypesController extends Controller
      */
     public function show(MembershipTypes $membershipTypes)
     {
-        //
+        return $membershipTypes;
     }
 
     /**

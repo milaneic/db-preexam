@@ -24,4 +24,9 @@ class People extends Model
     {
         return $this->belongsTo(PeopleType::class);
     }
+
+    public function cards()
+    {
+        return $this->hasMany(Card::class);
+    }
 }

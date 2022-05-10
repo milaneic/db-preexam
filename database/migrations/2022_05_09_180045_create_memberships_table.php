@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('people_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('people_id')->constrained('people')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('membership_type')->constrained('membership_types')->cascadeOnDelete()->cascadeOnUpdate();
             $table->dateTime('start_date');
             $table->dateTime('end_date');

@@ -16,8 +16,8 @@ class Membership extends Model
         return $this->belongsTo(MembershipTypes::class);
     }
 
-    public function people()
+    public function person()
     {
-        return $this->belongsTo(People::class);
+        return $this->belongsTo(People::class, 'people_id');
     }
 }

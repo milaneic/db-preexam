@@ -13,6 +13,6 @@ class MembershipTypes extends Model
 
     public function memberships()
     {
-        return $this->hasMany(Membership::class);
+        return $this->hasMany(Membership::class, 'membership_type');
     }
 }
