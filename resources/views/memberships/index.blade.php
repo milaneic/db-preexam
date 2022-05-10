@@ -29,7 +29,11 @@
             <td>{{ucfirst($m->status)}}</td>
             <td><a class="btn btn-primary" href="/memberships/{{$m->id}}">Details</a></td>
             <td><a class="btn btn-success" href="/memberships/edit/{{$m->id}}">Update</a></td>
-            <td><a class="btn btn-danger" href="/memberships/destroy/{{$m->id}}">Delete</a></td>
+            <form action="/memberships/{{$m->id}}" method="post">
+            @csrf
+            @method('DELETE')
+              <td><button class="btn btn-danger">Delete</button></td>
+            </form>
           </tr>
           @endforeach
         </tbody>

@@ -25,7 +25,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-        //
+        return view('memberships.create');
     }
 
     /**
@@ -36,7 +36,19 @@ class MembershipController extends Controller
      */
     public function store(StoreMembershipRequest $request)
     {
-        //
+
+
+        $request->validate([
+            'people_id' => 'required|integer|unique:memberships|exists:people,id',
+            'membership_type' => 'required|in:1,2',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'status' => 'required|in:active,inactive,paused'
+        ]);
+
+        Membership::create($request->all());
+
+        return redirect()->route('memberships.index');
     }
 
     /**
@@ -81,6 +93,8 @@ class MembershipController extends Controller
      */
     public function destroy(Membership $membership)
     {
-        //
+        if ($membership)
+            $membership->delete();
+        return redirect()->route('memberships.index');
     }
 }

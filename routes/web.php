@@ -27,19 +27,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PeopleController::class, 'index']);
 
-// Route::post('/people', [PeopleController::class, 'store']);
 Route::resource('people', PeopleController::class);
+
+// Route::post('/people', [PeopleController::class, 'store']);
 // Route::get('/people', [PeopleController::class, 'index']);
 // Route::get('/people/create', [PeopleController::class, 'create']);
-
 // Route::delete('/people/destroy/{person}', [PeopleController::class, 'destroy']);
 // Route::get('/people/{person}', [PeopleController::class, 'show']);
+
+
 
 Route::get('/peopletypes', [PeopleTypeController::class, 'index']);
 Route::get('/peopletypes/{peopleType}', [PeopleController::class, 'show']);
 
-Route::get('/memberships', [MembershipController::class, 'index']);
-Route::get('/memberships/{membership}', [MembershipController::class, 'show']);
+// Route::get('/memberships', [MembershipController::class, 'index']);
+// Route::get('/memberships/{membership}', [MembershipController::class, 'show']);
+Route::resource('memberships', MembershipController::class);
 
 Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
 Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::class, 'show']);
