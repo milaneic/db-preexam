@@ -11,13 +11,15 @@ class CheckIn extends Model
 
     protected $fillable = ['card_id', 'check_type', 'timestamp', 'timestamp_out'];
 
-    public function check_type()
-    {
-        return $this->belongsTo(CheckType::class);
-    }
-
     public function card()
     {
         return $this->belongsTo(Card::class);
+    }
+
+    public function getDiffFromCheckins()
+    {
+        if (!empty($this->timestamp) && !empty($this->timestamp_out)) {
+            return $this->timestamps->diff();
+        }
     }
 }

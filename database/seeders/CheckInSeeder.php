@@ -15,7 +15,6 @@ class CheckInSeeder extends Seeder
      */
     public function run()
     {
-        //
-        CheckIn::factory()->count(250)->create();
+        CheckIn::factory()->create();
     }
 }

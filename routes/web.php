@@ -2,13 +2,11 @@
 
 use App\Http\Controllers\CardController;
 use App\Http\Controllers\CheckInController;
-use App\Http\Controllers\CheckTypeController;
 use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MembershipTypesController;
 use App\Http\Controllers\PeopleController;
 use App\Http\Controllers\PeopleTypeController;
 use App\Models\CheckIn;
-use App\Models\CheckType;
 use App\Models\People;
 use App\Models\PeopleType;
 use Brick\Math\RoundingMode;
@@ -59,6 +57,3 @@ Route::resource('cards', CardController::class);
 
 Route::resource('checkins', CheckInController::class);
 Route::patch('/checkins/{checkin}/checkout', [CheckInController::class, 'checkout']);
-
-Route::get('/checktypes', [CheckTypeController::class, 'index']);
-Route::get('/checktypes/{checkType}', [CheckTypeController::class, 'show']);

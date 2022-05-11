@@ -4,18 +4,21 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Details about card:</h2>
+            <h2>Details about check in:</h2>
             <hr>
         </div>
         <div class="card mb-5">
             <div class="card-body">
-                <p>Membership id: {{$card->membership_id}}</p>
-                <p>Created at: {{date('d-m-Y H:i:s',strtotime($card->created_at))}}</p>
-                <p>Status: {{ucfirst($card->status)}}</p> 
+                <p>Card id: {{$checkin->card_id}}</p>
+                <p>Timestamp: {{date('d-m-Y H:i:s',strtotime($checkin->timestamp))}}</p>
+                <p>Status: @if ($checkin->status===1)
+                    Log in
+                @else
+                    Log out
+                @endif</p> 
             </div>
-        </div>
-        <br>
-        <br>
+        </div> 
+        {{--
         <div class="card mb-5">
             <h4>Data about owner of membership:</h4>
             @php
@@ -38,8 +41,7 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Check type</th>
-                            <th scope="col">Log in</th>
-                            <th scope="col">Log out</th>
+                            <th scope="col">Timestamp</th>
                             <th scope="col">Timespent</th>
                         </tr>
                     </thead>
@@ -49,20 +51,25 @@
                         
                         <tr>
                             <td>{{$i}}</td>
+                            <td>
+                                @if ($c->check_type===1)
+                                Log in
+                                @else
+                                Log out
+                                @endif
+                            </td>
                             <td>{{date('d-m-Y H:i:s',strtotime($c->timestamp))}}</td>
-                            <td>{{date('d-m-Y H:i:s',strtotime($c->timestamp))}}</td>
-                            @php
-                                $diff=DateTime::createFromFormat('d-m-Y H:i:s',strtotime(''))->diff(DateTime::createFromFormat('d-m-Y H:i:s',$c->timestamp_out));
-                                echo $diff;
-                            @endphp
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>    
-                @else
-                <h3>No memberships yet</h3>
-                @endif
-            </div>
-            
-        </div>
-        @endsection
+                            {{-- <td><a class="btn btn-primary" href="/people/{{$person->id}}">Details</a></td>
+                            <td><a class="btn btn-success" href="/people/">Update</a></td>
+                            <td><a class="btn btn-danger" href="/table/destroy/{}">Delete</a></td> --}}
+                            {{-- </tr>
+                                @endforeach
+                            </tbody>
+                        </table>    
+                        @else
+                        <h3>No memberships yet</h3>
+                        @endif --}}
+                    </div> 
+                    
+                </div>
+                @endsection

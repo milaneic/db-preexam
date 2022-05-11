@@ -25,7 +25,7 @@
             <th scope="row">{{$c->id}}</th>
             <td>{{$c->card->id}}</td>
             <td>{{date('d-m-Y H:i:s',strtotime($c->timestamp))}}</td>
-            @if (!$c->timestamp_out)
+            @if (!$c->time_spent)
             <td><form action="/checkins/{{$c->id}}/checkout" method="post">
               @csrf
               @method('PATCH')
@@ -34,10 +34,8 @@
             <td>still in gym</td>
             @else
             <td>{{date('d-m-Y H:i:s',strtotime($c->timestamp_out))}}</td>
-            @php
-            $interval=DateTime::createFromFormat('Y-m-d H:i:s',$c->timestamp)->diff(DateTime::createFromFormat('Y-m-d H:i:s',$c->timestamp_out));
-            @endphp
-            <td>{{$interval->format('%H:%I:%S')}}</td>
+           
+            <td>{{gmDate("H:i:s",$c->time_spent)}}</td>
             @endif
             <td><a href="/checkins/{{$c->id}}" class="btn btn-primary">Details</a></td>
             <td><a href="/checkins/{{$c->id}}/edit" class="btn btn-success">Update</a></td>

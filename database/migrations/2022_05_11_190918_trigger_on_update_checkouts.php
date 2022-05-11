@@ -13,11 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('check_types', function (Blueprint $table) {
-            $table->id();
-            $table->string('type');
-            $table->timestamps();
-        });
     }
 
     /**
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('check_types');
+        //
     }
 };

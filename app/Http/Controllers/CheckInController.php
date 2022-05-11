@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCheckInRequest;
 use App\Http\Requests\UpdateCheckInRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\CheckIn;
 use Carbon\Carbon;
 
@@ -109,9 +110,8 @@ class CheckInController extends Controller
 
     public function checkout(CheckIn $checkin)
     {
-        $checkin->timestamp_out = Carbon::now();
-        $checkin->save();
-
+        if ($checkin)
+            $query = DB::select('CALL checkout_user_card(' . $checkin->id . ')');
         return redirect()->route('checkins.index');
     }
 }
