@@ -9,7 +9,7 @@ class CheckIn extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['card_id', 'check_type', 'tistamp', 'time_spent'];
+    protected $fillable = ['card_id', 'check_type', 'timestamp', 'timestamp_out'];
 
     public function check_type()
     {

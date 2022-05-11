@@ -26,7 +26,7 @@
               <a class="nav-link active" aria-current="page" href="/people">People</a>
               <a class="nav-link" href="/memberships">Memberships</a>
               <a class="nav-link" href="/cards">Cards</a>
-              <a class="nav-link" href="/checkin">Check ins</a>
+              <a class="nav-link" href="/checkins">Check ins</a>
             </div>
           </div>
         </div>

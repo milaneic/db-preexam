@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('card_id')->constrained('cards')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('check_type')->constrained('check_types')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamp('timestamp');
-            $table->timestamp('time_spent');
+            $table->timestamp('timestamp_out')->nullable();
             $table->timestamps();
         });
     }

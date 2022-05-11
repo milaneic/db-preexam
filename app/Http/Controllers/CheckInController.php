@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreCheckInRequest;
 use App\Http\Requests\UpdateCheckInRequest;
 use App\Models\CheckIn;
+use Carbon\Carbon;
 
 class CheckInController extends Controller
 {
@@ -25,7 +26,7 @@ class CheckInController extends Controller
      */
     public function create()
     {
-        //
+        return view('checkins.create');
     }
 
     /**
@@ -36,7 +37,15 @@ class CheckInController extends Controller
      */
     public function store(StoreCheckInRequest $request)
     {
-        //
+        $request->validate([
+            'card_id' => 'required|exists:cards,id',
+            'check_type' => 'required|in:1,2',
+            'timestamp' => 'required|date',
+        ]);
+
+        CheckIn::create($request->all());
+
+        return redirect()->route('checkins.index');
     }
 
     /**
@@ -45,9 +54,12 @@ class CheckInController extends Controller
      * @param  \App\Models\CheckIn  $checkIn
      * @return \Illuminate\Http\Response
      */
-    public function show(CheckIn $checkIn)
+    public function show(CheckIn $checkin)
     {
-        return $checkIn;
+        return view(
+            'checkins.show',
+            ['checkin' => $checkin]
+        );
     }
 
     /**
@@ -68,9 +80,17 @@ class CheckInController extends Controller
      * @param  \App\Models\CheckIn  $checkIn
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCheckInRequest $request, CheckIn $checkIn)
+    public function update(UpdateCheckInRequest $request, CheckIn $checkin)
     {
-        //
+        $request->validate([
+            'card_id' => 'required|exists:cards,id',
+            'check_type' => 'required|in:1,2',
+            'timestamp' => 'required|date',
+        ]);
+
+        $checkin->updateOrFail($request->all());
+
+        return redirect()->route('checkins.index');
     }
 
     /**
@@ -79,8 +99,19 @@ class CheckInController extends Controller
      * @param  \App\Models\CheckIn  $checkIn
      * @return \Illuminate\Http\Response
      */
-    public function destroy(CheckIn $checkIn)
+    public function destroy(CheckIn $checkin)
     {
-        //
+        if ($checkin)
+            $checkin->delete();
+
+        return redirect()->route('checkins.index');
+    }
+
+    public function checkout(CheckIn $checkin)
+    {
+        $checkin->timestamp_out = Carbon::now();
+        $checkin->save();
+
+        return redirect()->route('checkins.index');
     }
 }

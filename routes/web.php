@@ -54,8 +54,11 @@ Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::cla
 Route::resource('cards', CardController::class);
 
 
-Route::get('/checkin', [CheckInController::class, 'index']);
-Route::get('/checkin/{checkIn}', [CheckInController::class, 'show']);
+// Route::get('/checkin', [CheckInController::class, 'index']);
+// Route::get('/checkin/{checkIn}', [CheckInController::class, 'show']);
+
+Route::resource('checkins', CheckInController::class);
+Route::patch('/checkins/{checkin}/checkout', [CheckInController::class, 'checkout']);
 
 Route::get('/checktypes', [CheckTypeController::class, 'index']);
 Route::get('/checktypes/{checkType}', [CheckTypeController::class, 'show']);
