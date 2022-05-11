@@ -2,6 +2,18 @@
 @section('title','People')
 @section('content')
 <div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card mb-5 mt-5">
+        <div class="card-body p-5">
+          Executed queries:<br>
+          @foreach ($logs as $log )
+            {{$log['query']}}
+          @endforeach
+        </div>
+      </div>
+    </div>
+  </div>
     <div class="row">
         <div class="col-md-12">
             <h2>All people</h2>

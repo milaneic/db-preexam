@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StorePeopleRequest;
 use App\Http\Requests\UpdatePeopleRequest;
 use App\Models\People;
+use Illuminate\Support\Facades\DB;
 
 class PeopleController extends Controller
 {
@@ -15,7 +16,11 @@ class PeopleController extends Controller
      */
     public function index()
     {
-        return view('people.index', ['people' => People::all()]);
+        DB::enableQueryLog();
+        $people = People::all();
+        $logs = DB::getQueryLog();
+
+        return view('people.index', ['people' => $people, 'logs' => $logs]);
     }
 
     /**
@@ -44,9 +49,7 @@ class PeopleController extends Controller
             'dob' => 'required|date',
             'joined_at' => 'required|date'
         ]);
-
         People::create($validatedData);
-
         return redirect()->route('people.index');
     }
 
