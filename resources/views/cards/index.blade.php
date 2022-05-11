@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            All Cards
+            <h4>All cards</h4>
+            <a href="/cards/create" class="btn btn-primary">Create a card</a>
             <table class="table caption-top">
                 <caption>List of Cards</caption>
                 <thead>
@@ -29,8 +30,12 @@
                         <td>{{date('d-m-Y',strtotime($c->end_date))}}</td>
                         <td>{{ucfirst($c->status)}}</td>
                         <td><a class="btn btn-primary" href="/cards/{{$c->id}}">Details</a></td>
-                        <td><a class="btn btn-success" href="/cards/edit/{{$c->id}}">Update</a></td>
-                        <td><a class="btn btn-danger" href="/table/destroy/{{$c->id}}">Delete</a></td>
+                        <td><a class="btn btn-success" href="/cards/{{$c->id}}/edit">Update</a></td>
+                        <form action="/cards/{{$c->id}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                        <td><button class="btn btn-danger" type="submit">Delete</button></td>
+                        </form>
 
                     </tr>
                     @endforeach

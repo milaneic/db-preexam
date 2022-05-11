@@ -20,9 +20,4 @@ class Card extends Model
     {
         return $this->hasMany(CheckIn::class);
     }
-
-    public function people()
-    {
-        return $this->belongsTo(People::class);
-    }
 }

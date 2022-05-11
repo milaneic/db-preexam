@@ -25,8 +25,7 @@ class CardController extends Controller
      */
     public function create()
     {
-        //
-
+        return view('cards.create');
     }
 
     /**
@@ -37,7 +36,15 @@ class CardController extends Controller
      */
     public function store(StoreCardRequest $request)
     {
-        //
+        $request->validate([
+            'membership_id' => 'required|unique:cards,membership_id|exists:memberships,id|',
+            'balance' => 'required|numeric|between:0,99.99',
+            'status' => 'required|in:active,inactive'
+        ]);
+
+        Card::create($request->all());
+
+        return redirect()->route('cards.index');
     }
 
     /**
@@ -48,7 +55,7 @@ class CardController extends Controller
      */
     public function show(Card $card)
     {
-        dd($card->membership, $card->check_ins);
+        return view('cards.show', ['card' => $card]);
     }
 
     /**
@@ -59,7 +66,7 @@ class CardController extends Controller
      */
     public function edit(Card $card)
     {
-        //
+        return view('cards.edit', ['card' => $card]);
     }
 
     /**
@@ -71,7 +78,15 @@ class CardController extends Controller
      */
     public function update(UpdateCardRequest $request, Card $card)
     {
-        //
+        $request->validate([
+            'membership_id' => 'required|exists:memberships,id|',
+            'balance' => 'required|numeric|between:0,99.99',
+            'status' => 'required|in:active,inactive'
+        ]);
+
+        $card->updateOrFail($request->all());
+
+        return redirect()->route('cards.index');
     }
 
     /**
@@ -82,6 +97,8 @@ class CardController extends Controller
      */
     public function destroy(Card $card)
     {
-        //
+        if ($card)
+            $card->delete();
+        return redirect()->route('cards.index');
     }
 }

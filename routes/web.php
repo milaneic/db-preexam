@@ -48,8 +48,10 @@ Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
 Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::class, 'show']);
 
 
-Route::get('/cards', [CardController::class, 'index']);
-Route::get('/cards/{card}', [CardController::class, 'show']);
+// Route::get('/cards', [CardController::class, 'index']);
+// Route::get('/cards/{card}', [CardController::class, 'show']);
+
+Route::resource('cards', CardController::class);
 
 
 Route::get('/checkin', [CheckInController::class, 'index']);
