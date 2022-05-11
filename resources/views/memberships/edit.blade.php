@@ -2,52 +2,63 @@
 @section('title','Create person')
 @section('content')
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <h3>Create a person:</h3>
-            <form action="/people/{{$person->id}}" method="POST">
-                @csrf
-                @method('PUT')
-                <div class="mb-3">
-                  {{{!! Form::number($people_id,0, [$options]) !!}}}
-                <div class="mb-3">
-                    <label for="first_name" class="form-label">First name</label>
-                    <input class="form-control" name="first_name" value="{{$person->first_name}}" type="text" id="first_name">
-                  </div>
-                  <div class="mb-3">
-                    <label for="last_name" class="form-label">Last name</label>
-                    <input class="form-control" name="last_name" value="{{$person->last_name}}" type="text" id="last_name">
-                  </div>
-                  <div class="mb-3">
-                    <label for="dob" class="form-label">Date of birth</label>
-                    <input type="date" name="dob" id="dob" value="{{$person->dob}}" class="form-control">
-                  </div>
-                  <div class="mb-3">
-                    <label for="gender" class="form-label">Gender</label>
-                    <select class="form-control" name="gender">
-                        @if ($person->gender==='male')
-                        <option value="female">Female</option>
-                        <option value="male" selected>Male</option>
-                        @else
-                        <option value="female" selected>Female</option>
-                        <option value="male" >Male</option>
-                        @endif
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label for="joined_at" class="form-label">Joined at</label>
-                    <input type="datetime" name="joined_at" id="joined_atob"  value="{{$person->joined_at}}" class="form-control">
-                  </div>
-                  <input type="submit" class="btn btn-primary" value="Submit">
-            </form>
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Create a membership:</h3>
+      @if (count($errors)>0)
+      @foreach ($errors->all() as $error )
+      <p>{{$error}}</p>
+      @endforeach
+      @endif
+      <form action="/memberships/{{$membership->id}}" method="POST">
+        @csrf
+        @method('PUT')
+        <div class="mb-3">
+          <label for="people_id" class="form-label">User id</label>
+          <input class="form-control" name="people_id" value="{{$membership->people_id}}"  type="number" id="people_id">
         </div>
+        <div class="mb-3">
+          <label for="membership_type" class="form-label">Membership type</label>
+          <select class="form-control" name="membership_type">
+            @if ($membership->membership_type===1)
+            <option value="1" selected>Premiun</option>
+            <option value="2">Standard</option>
+            @else
+            <option value="1">Premiun</option>
+            <option value="2" selected>Standard</option>
+            @endif
+          
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="start_date" class="form-label">Started date</label>
+          <input type="datetime" name="start_date" value="{{$membership->start_date}}" id="start_date" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="end_date" class="form-label">End date</label>
+          <input type="datetime" name="end_date" value="{{$membership->end_date}}" id="end_date" class="form-control">
+        </div>
+        <div class="mb-3">
+          <label for="status" class="form-label">Status</label>
+          <select class="form-control" name="status"> 
+            @if ($membership->status==='active')
+            <option value="active" selected>Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="paused">Paused</option>
+            @elseif($membership->status==='inactive')
+            <option value="active">Active</option>
+            <option value="inactive" selected>Inactive</option>
+            <option value="paused">Paused</option>
+            @else
+            <option value="active">Active</option>
+            <option value="inactive">Inactive</option>
+            <option value="paused" selected>Paused</option>
+            @endif
+          </select>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Submit">
+      </form>
     </div>
+  </div>
 </div>
-@endsection
-@section('script')
-<script>
-         $(function () {
-             $('#datetimepicker1').datetimepicker();
-         });
-</script>
 @endsection

@@ -36,8 +36,6 @@ class MembershipController extends Controller
      */
     public function store(StoreMembershipRequest $request)
     {
-
-
         $request->validate([
             'people_id' => 'required|integer|unique:memberships|exists:people,id',
             'membership_type' => 'required|in:1,2',
@@ -59,7 +57,7 @@ class MembershipController extends Controller
      */
     public function show(Membership $membership)
     {
-        return $membership;
+        return view('memberships.show', ['membership' => $membership, 'person' => $membership->person]);
     }
 
     /**
@@ -70,7 +68,7 @@ class MembershipController extends Controller
      */
     public function edit(Membership $membership)
     {
-        //
+        return view('memberships.edit', ['membership' => $membership]);
     }
 
     /**
@@ -82,7 +80,17 @@ class MembershipController extends Controller
      */
     public function update(UpdateMembershipRequest $request, Membership $membership)
     {
-        //
+        $request->validate([
+            'people_id' => 'required|integer|exists:people,id',
+            'membership_type' => 'required|in:1,2',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date',
+            'status' => 'required|in:active,inactive,paused'
+        ]);
+
+        $membership->updateOrFail($request->all());
+
+        return redirect()->route('memberships.index');
     }
 
     /**

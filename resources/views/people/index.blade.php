@@ -4,7 +4,8 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            All Poople
+            <h2>All people</h2>
+            <a href="/people/create" class="btn btn-primary">Create a new person</a>
             <table class="table caption-top">
                 <caption>List of users</caption>
                 <thead>

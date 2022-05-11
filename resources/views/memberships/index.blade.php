@@ -4,7 +4,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      All Memberships
+      <h2>All memberships</h2>
+            <a href="/memberships/create" class="btn btn-primary">Create a new memberships</a>
       <table class="table caption-top">
         <caption>List of Memberships</caption>
         <thead>
@@ -28,7 +29,7 @@
             <td>{{date('d-m-Y',strtotime($m->end_date))}}</td>
             <td>{{ucfirst($m->status)}}</td>
             <td><a class="btn btn-primary" href="/memberships/{{$m->id}}">Details</a></td>
-            <td><a class="btn btn-success" href="/memberships/edit/{{$m->id}}">Update</a></td>
+            <td><a class="btn btn-success" href="/memberships/{{$m->id}}/edit">Update</a></td>
             <form action="/memberships/{{$m->id}}" method="post">
             @csrf
             @method('DELETE')
