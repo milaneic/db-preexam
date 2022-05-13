@@ -11,7 +11,7 @@
             <div class="card-body">
                 <p>Membership type: {{$membership->membership_type}}</p>
                 <p>Person id: {{$membership->people_id}}</p>
-                <p>Start date: {{date('d-m-Y H:i:s',strtotime($membership->start_date))}}</p>
+                <p>Start date: {{date('d-m-Y H:i:s',strtotime($membership->begin_date))}}</p>
                 <p>End date: {{date('d-m-Y H:i:s',strtotime($membership->end_date))}}</p>
                 <p>Status: {{ucfirst($membership->status)}}</p> 
             </div>

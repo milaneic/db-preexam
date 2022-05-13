@@ -89,7 +89,7 @@ class CheckInController extends Controller
             'timestamp' => 'required|date',
         ]);
 
-        $checkin->updateOrFail($request->all());
+        $checkin->update($request->all());
 
         return redirect()->route('checkins.index');
     }
@@ -110,8 +110,8 @@ class CheckInController extends Controller
 
     public function checkout(CheckIn $checkin)
     {
-        if ($checkin)
-            $query = DB::select('CALL checkout_user_card(' . $checkin->id . ')');
+
+        DB::select('CALL checkout_user_card(' . $checkin->id . ')');
         return redirect()->route('checkins.index');
     }
 }

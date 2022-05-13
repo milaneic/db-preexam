@@ -24,8 +24,8 @@
           </select>
         </div>
         <div class="mb-3">
-          <label for="start_date" class="form-label">Started date</label>
-          <input type="datetime" name="start_date" id="start_date" class="form-control">
+          <label for="begin_date" class="form-label">Started date</label>
+          <input type="datetime" name="begin_date" id="begin_date" class="form-control">
         </div>
         <div class="mb-3">
           <label for="end_date" class="form-label">End date</label>

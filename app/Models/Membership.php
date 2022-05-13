@@ -9,7 +9,7 @@ class Membership extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['people_id', 'membership_type', 'start_date', 'end_date', 'status'];
+    protected $fillable = ['people_id', 'membership_type', 'begin_date', 'end_date', 'status'];
 
     public function membership_type()
     {
@@ -19,5 +19,10 @@ class Membership extends Model
     public function person()
     {
         return $this->belongsTo(People::class, 'people_id');
+    }
+
+    public function card()
+    {
+        return $this->hasOne(Card::class);
     }
 }

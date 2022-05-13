@@ -40,7 +40,7 @@
                         <tr>
                             <td>{{$i}}</td>
                             <td>{{$m->membership_type}}</td>
-                            <td>{{date('d-m-Y',strtotime($m->start_date))}}</td>
+                            <td>{{date('d-m-Y',strtotime($m->begin_date))}}</td>
                             <td>{{date('d-m-Y',strtotime($m->enddate_date))}}</td>
                             <td>{{ucfirst($m->status)}}</td>
                             {{-- <td><a class="btn btn-primary" href="/people/{{$person->id}}">Details</a></td>

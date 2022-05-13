@@ -9,7 +9,7 @@ class Card extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['people_id', 'membership_id', 'balance', 'status'];
+    protected $fillable = ['people_id', 'membership_id', 'valid_from', 'valid_to', 'balance', 'status'];
 
     public function membership()
     {

@@ -27,33 +27,17 @@ Route::get('/', [PeopleController::class, 'index']);
 
 Route::resource('people', PeopleController::class);
 
-// Route::post('/people', [PeopleController::class, 'store']);
-// Route::get('/people', [PeopleController::class, 'index']);
-// Route::get('/people/create', [PeopleController::class, 'create']);
-// Route::delete('/people/destroy/{person}', [PeopleController::class, 'destroy']);
-// Route::get('/people/{person}', [PeopleController::class, 'show']);
-
-
-
 Route::get('/peopletypes', [PeopleTypeController::class, 'index']);
 Route::get('/peopletypes/{peopleType}', [PeopleController::class, 'show']);
 
-// Route::get('/memberships', [MembershipController::class, 'index']);
-// Route::get('/memberships/{membership}', [MembershipController::class, 'show']);
+Route::get('/memberships/update', [MembershipController::class, 'updateStatus']);
 Route::resource('memberships', MembershipController::class);
 
 Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
 Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::class, 'show']);
 
-
-// Route::get('/cards', [CardController::class, 'index']);
-// Route::get('/cards/{card}', [CardController::class, 'show']);
-
+Route::get('/cards/update', [CardController::class, 'updateStatus']);
 Route::resource('cards', CardController::class);
-
-
-// Route::get('/checkin', [CheckInController::class, 'index']);
-// Route::get('/checkin/{checkIn}', [CheckInController::class, 'show']);
 
 Route::resource('checkins', CheckInController::class);
 Route::patch('/checkins/{checkin}/checkout', [CheckInController::class, 'checkout']);

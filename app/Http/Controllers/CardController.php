@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\Card;
 
 class CardController extends Controller
@@ -100,5 +101,13 @@ class CardController extends Controller
         if ($card)
             $card->delete();
         return redirect()->route('cards.index');
+    }
+
+    public function updateStatus()
+    {
+        // config()->set('database.connections.mysql.strict', false);
+        DB::select('CALL update_cards_status');
+        return redirect()->route('cards.index');
+        // config()->set('database.connections.mysql.strict', true);
     }
 }

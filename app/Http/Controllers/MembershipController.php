@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMembershipRequest;
 use App\Http\Requests\UpdateMembershipRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\Membership;
 
 class MembershipController extends Controller
@@ -39,7 +40,7 @@ class MembershipController extends Controller
         $request->validate([
             'people_id' => 'required|integer|unique:memberships|exists:people,id',
             'membership_type' => 'required|in:1,2',
-            'start_date' => 'required|date',
+            'begin_date' => 'required|date',
             'end_date' => 'required|date',
             'status' => 'required|in:active,inactive,paused'
         ]);
@@ -83,7 +84,7 @@ class MembershipController extends Controller
         $request->validate([
             'people_id' => 'required|integer|exists:people,id',
             'membership_type' => 'required|in:1,2',
-            'start_date' => 'required|date',
+            'begin_date' => 'required|date',
             'end_date' => 'required|date',
             'status' => 'required|in:active,inactive,paused'
         ]);
@@ -104,5 +105,13 @@ class MembershipController extends Controller
         if ($membership)
             $membership->delete();
         return redirect()->route('memberships.index');
+    }
+
+    public function updateStatus()
+    {
+        config()->set('database.connections.mysql.strict', false);
+        DB::select('CALL update_memberships_status');
+        return redirect()->route('memberships.index');
+        config()->set('database.connections.mysql.strict', true);
     }
 }

@@ -14,13 +14,19 @@ return new class extends Migration
     public function up()
     {
         \DB::unprepared('
-        CREATE TRIGGER after_membership_insert 
-        AFTER INSERT 
+        CREATE TRIGGER after_membership_update 
+        AFTER UPDATE 
         ON memberships FOR EACH ROW
-        BEGIN 
-        INSERT INTO cards (membership_id,valid_from, valid_to, balance,status,created_at,updated_at)
-        VALUES (NEW.id, NEW.begin_date, NEW.end_date,0,"active",NOW(),NOW());
-        END');
+        BEGIN
+        IF OLD.begin_date <> NEW.begin_date 
+        THEN 
+        UPDATE cards SET valid_from=NEW.begin_date WHERE membership_id=OLD.id;
+        END IF;
+        IF NEW.end_date <> OLD.end_date 
+        THEN 
+        UPDATE cards SET valid_to=NEW.end_date WHERE membership_id=OLD.id;
+        END IF;
+        END;');
     }
 
     /**
@@ -30,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_after_membership_insert');
+        //
     }
 };

@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('membership_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->decimal('balance');
+            $table->timestamp('valid_from');
+            $table->timestamp('valid_to');
             $table->enum('status', ['active', 'inactive']);
             $table->timestamps();
         });

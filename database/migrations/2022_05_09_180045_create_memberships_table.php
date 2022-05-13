@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('people_id')->constrained('people')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('membership_type')->constrained('membership_types')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->dateTime('start_date');
+            $table->dateTime('begin_date');
             $table->dateTime('end_date');
             $table->enum('status', ['active', 'inactive', 'paused']);
             $table->timestamps();

@@ -13,17 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-
-        \DB::unprepared('
-        CREATE TRIGGER after_person_insert 
-        AFTER INSERT 
-        ON people FOR EACH ROW
+        \DB::unprepared("
+        DROP PROCEDURE IF EXISTS `update_memberships_status`;
+        CREATE PROCEDURE `update_memberships_status`()
         BEGIN
-        IF NEW.people_type=1 THEN 
-        INSERT INTO memberships (people_id,membership_type,begin_date,end_date,status,created_at,updated_at)
-        VALUES (NEW.id,1,NOW(),DATE_ADD(NOW(),INTERVAL 1 year),"active",NOW(),NOW());
-        END IF;
-        END');
+        UPDATE memberships SET status='inactive' WHERE end_date <= NOW();
+        END;
+        ");
     }
 
     /**

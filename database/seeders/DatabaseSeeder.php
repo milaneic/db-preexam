@@ -23,8 +23,8 @@ class DatabaseSeeder extends Seeder
             PeopleTypeSeeder::class,
             PeopleSeeder::class,
             MembershipSeeder::class,
-            CardSeeder::class,
-            CheckInSeeder::class,
+            // CardSeeder::class,
+            // CheckInSeeder::class,
         ]);
     }
 }

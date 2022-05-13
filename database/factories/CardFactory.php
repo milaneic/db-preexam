@@ -20,6 +20,8 @@ class CardFactory extends Factory
             //
             'membership_id' => $this->faker->numberBetween(1, 100),
             'balance' => $this->faker->randomFloat(2, 1, 20),
+            'valid_from' => $this->faker->timestamp(),
+            'valid_to' => $this->faker->timestamp(),
             'status' => $this->faker->randomElement(['active', 'inactive']),
 
         ];

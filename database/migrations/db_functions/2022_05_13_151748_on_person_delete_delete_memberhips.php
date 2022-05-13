@@ -14,12 +14,11 @@ return new class extends Migration
     public function up()
     {
         \DB::unprepared('
-        CREATE TRIGGER after_membership_insert 
-        AFTER INSERT 
-        ON memberships FOR EACH ROW
-        BEGIN 
-        INSERT INTO cards (membership_id,valid_from, valid_to, balance,status,created_at,updated_at)
-        VALUES (NEW.id, NEW.begin_date, NEW.end_date,0,"active",NOW(),NOW());
+        CREATE TRIGGER before_cards_delete 
+        BEFORE DELETE
+        ON cards FOR EACH ROW
+        BEGIN
+        DELETE FROM check_ins WHERE card_id=OLD.id;
         END');
     }
 
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('card_after_membership_insert');
+        //
     }
 };
