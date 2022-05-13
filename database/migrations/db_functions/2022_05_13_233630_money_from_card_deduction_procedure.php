@@ -18,8 +18,8 @@ return new class extends Migration
             DROP PROCEDURE IF EXISTS `money_deduction`;
             CREATE PROCEDURE `money_deduction`(IN amount double(4,2))
             BEGIN
-            UPDATE cards SET balance=balance-amount WHERE balance >= amount AND status="active";
             UPDATE cards SET status="inactive" WHERE balance <= amount;
+            UPDATE cards SET balance=balance-amount WHERE balance >= amount AND status="active";
             END;
             '
         );
