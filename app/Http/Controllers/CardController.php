@@ -6,6 +6,7 @@ use App\Http\Requests\StoreCardRequest;
 use App\Http\Requests\UpdateCardRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Card;
+use GuzzleHttp\Psr7\Request;
 
 class CardController extends Controller
 {
@@ -105,9 +106,20 @@ class CardController extends Controller
 
     public function updateStatus()
     {
-        // config()->set('database.connections.mysql.strict', false);
         DB::select('CALL update_cards_status');
         return redirect()->route('cards.index');
-        // config()->set('database.connections.mysql.strict', true);
+    }
+
+    public function deduct(StoreCardRequest $request)
+    {
+        $request->validate([
+            'amount' => 'required|numeric|min:1|max:20',
+        ]);
+
+        $amount = $request->get('amount');
+
+        DB::select("CALL money_deduction($amount)");
+
+        return redirect()->route('cards.index');
     }
 }

@@ -37,6 +37,7 @@ Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
 Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::class, 'show']);
 
 Route::get('/cards/update', [CardController::class, 'updateStatus']);
+Route::post('/cards/deduct', [CardController::class, 'deduct']);
 Route::resource('cards', CardController::class);
 
 Route::resource('checkins', CheckInController::class);
