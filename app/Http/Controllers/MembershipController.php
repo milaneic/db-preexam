@@ -39,7 +39,7 @@ class MembershipController extends Controller
     public function store(StoreMembershipRequest $request)
     {
         $request->validate([
-            'people_id' => 'required|integer|unique:memberships|exists:people,id',
+            'people_id' => 'required|integer|exists:people,id',
             'membership_type' => 'required|in:1,2',
             'begin_date' => 'required|date',
             'end_date' => 'required|date',
