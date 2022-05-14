@@ -18,7 +18,7 @@ class PeopleTypeFactory extends Factory
     {
         return [
             //
-            'type' => $this->faker->unique()->randomElement(['User', 'Staf'])
+            'type' => $this->faker->unique()->randomElement(['User', 'Staff'])
         ];
     }
 }

@@ -13,7 +13,7 @@ class UpdateMembershipTypesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**

@@ -6,6 +6,7 @@ use App\Http\Requests\StoreMembershipRequest;
 use App\Http\Requests\UpdateMembershipRequest;
 use Illuminate\Support\Facades\DB;
 use App\Models\Membership;
+use App\Models\MembershipTypes;
 
 class MembershipController extends Controller
 {
@@ -26,7 +27,7 @@ class MembershipController extends Controller
      */
     public function create()
     {
-        return view('memberships.create');
+        return view('memberships.create', ['memberhip_types' => MembershipTypes::all()]);
     }
 
     /**

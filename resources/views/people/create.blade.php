@@ -10,8 +10,9 @@
                 <div class="mb-3">
                   <label for="people_type" class="form-label">Person type</label>
                   <select class="form-control" name="people_type">
-                      <option value="1">User</option>
-                      <option value="2">Staff</option>
+                    @foreach ($people_types as $pt )
+                      <option value="{{$pt->id}}">{{ucfirst($pt->type)}}</option>
+                    @endforeach
                   </select>
                 </div>
                 <div class="mb-3">

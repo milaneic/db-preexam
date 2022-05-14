@@ -19,8 +19,9 @@
         <div class="mb-3">
           <label for="membership_type" class="form-label">Membership type</label>
           <select class="form-control" name="membership_type">
-            <option value="1">Premiun</option>
-            <option value="2">Standard</option>
+            @foreach ($memberhip_types as $mt )
+            <option value="{{$mt->id}}">{{ucfirst($mt->type)}}</option>
+          @endforeach
           </select>
         </div>
         <div class="mb-3">

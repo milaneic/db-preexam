@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePeopleTypeRequest;
 use App\Http\Requests\UpdatePeopleTypeRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\PeopleType;
 
 class PeopleTypeController extends Controller
@@ -15,7 +16,7 @@ class PeopleTypeController extends Controller
      */
     public function index()
     {
-        return PeopleType::all();
+        return view('people_types.index', ['peopletypes' => DB::select('select * from people_types')]);
     }
 
     /**
@@ -25,7 +26,7 @@ class PeopleTypeController extends Controller
      */
     public function create()
     {
-        //
+        return view('people_types.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class PeopleTypeController extends Controller
      */
     public function store(StorePeopleTypeRequest $request)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|min:2|max:12'
+        ]);
+
+        DB::insert('insert into people_types (type) values (?)', [$request->get('type')]);
+
+        return redirect()->route('peopletypes.index');
     }
 
     /**
@@ -45,7 +52,7 @@ class PeopleTypeController extends Controller
      * @param  \App\Models\PeopleType  $peopleType
      * @return \Illuminate\Http\Response
      */
-    public function show(PeopleType $peopleType)
+    public function show(PeopleType $peopletype)
     {
         dd($peopleType->people);
         return $peopleType;
@@ -57,9 +64,9 @@ class PeopleTypeController extends Controller
      * @param  \App\Models\PeopleType  $peopleType
      * @return \Illuminate\Http\Response
      */
-    public function edit(PeopleType $peopleType)
+    public function edit(PeopleType $peopletype)
     {
-        //
+        return view('people_types.edit', ['pt' => $peopletype]);
     }
 
     /**
@@ -69,9 +76,15 @@ class PeopleTypeController extends Controller
      * @param  \App\Models\PeopleType  $peopleType
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePeopleTypeRequest $request, PeopleType $peopleType)
+    public function update(UpdatePeopleTypeRequest $request, PeopleType $peopletype)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|min:2|max:12'
+        ]);
+
+        DB::update('update people_types set type = ? where id = ?', [$request->get('type'), $peopletype->id]);
+
+        return redirect()->route('peopletypes.index');
     }
 
     /**
@@ -80,7 +93,7 @@ class PeopleTypeController extends Controller
      * @param  \App\Models\PeopleType  $peopleType
      * @return \Illuminate\Http\Response
      */
-    public function destroy(PeopleType $peopleType)
+    public function destroy(PeopleType $peopletype)
     {
         //
     }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreMembershipTypesRequest;
 use App\Http\Requests\UpdateMembershipTypesRequest;
+use Illuminate\Support\Facades\DB;
 use App\Models\MembershipTypes;
 
 class MembershipTypesController extends Controller
@@ -15,7 +16,7 @@ class MembershipTypesController extends Controller
      */
     public function index()
     {
-        return MembershipTypes::all();
+        return view('memberships_types.index', ['membershiptypes' => DB::select('select * from membership_types')]);
     }
 
     /**
@@ -25,7 +26,7 @@ class MembershipTypesController extends Controller
      */
     public function create()
     {
-        //
+        return view('memberships_types.create');
     }
 
     /**
@@ -36,7 +37,13 @@ class MembershipTypesController extends Controller
      */
     public function store(StoreMembershipTypesRequest $request)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|min:2|max:12'
+        ]);
+
+        DB::insert('insert into membership_types (type) values (?)', [$request->get('type')]);
+
+        return redirect()->route('membershiptypes.index');
     }
 
     /**
@@ -45,9 +52,9 @@ class MembershipTypesController extends Controller
      * @param  \App\Models\MembershipTypes  $membershipTypes
      * @return \Illuminate\Http\Response
      */
-    public function show(MembershipTypes $membershipTypes)
+    public function show(MembershipTypes $membershiptype)
     {
-        return $membershipTypes;
+        return $membershiptype;
     }
 
     /**
@@ -56,9 +63,9 @@ class MembershipTypesController extends Controller
      * @param  \App\Models\MembershipTypes  $membershipTypes
      * @return \Illuminate\Http\Response
      */
-    public function edit(MembershipTypes $membershipTypes)
+    public function edit(MembershipTypes $membershiptype)
     {
-        //
+        return view('memberships_types.edit', ['mt' => $membershiptype]);
     }
 
     /**
@@ -68,9 +75,15 @@ class MembershipTypesController extends Controller
      * @param  \App\Models\MembershipTypes  $membershipTypes
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMembershipTypesRequest $request, MembershipTypes $membershipTypes)
+    public function update(UpdateMembershipTypesRequest $request, MembershipTypes $membershiptype)
     {
-        //
+        $request->validate([
+            'type' => 'required|string|min:2|max:12'
+        ]);
+
+        DB::update('update membership_types set type = ? where id = ?', [$request->get('type'), $membershiptype->id]);
+
+        return redirect()->route('membershiptypes.index');
     }
 
     /**
@@ -79,7 +92,7 @@ class MembershipTypesController extends Controller
      * @param  \App\Models\MembershipTypes  $membershipTypes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MembershipTypes $membershipTypes)
+    public function destroy(MembershipTypes $membershiptype)
     {
         //
     }

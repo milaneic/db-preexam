@@ -27,14 +27,13 @@ Route::get('/', [PeopleController::class, 'index']);
 
 Route::resource('people', PeopleController::class);
 
-Route::get('/peopletypes', [PeopleTypeController::class, 'index']);
-Route::get('/peopletypes/{peopleType}', [PeopleController::class, 'show']);
+Route::resource('peopletypes', PeopleTypeController::class);
+
 
 Route::get('/memberships/update', [MembershipController::class, 'updateStatus']);
 Route::resource('memberships', MembershipController::class);
 
-Route::get('/membershiptypes', [MembershipTypesController::class, 'index']);
-Route::get('/membershiptypes/{membershipTypes}', [MembershipTypesController::class, 'show']);
+Route::resource('membershiptypes', MembershipTypesController::class);
 
 Route::get('/cards/update', [CardController::class, 'updateStatus']);
 Route::post('/cards/deduct', [CardController::class, 'deduct']);
